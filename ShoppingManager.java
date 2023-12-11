@@ -6,5 +6,7 @@ public interface ShoppingManager {
     Product findProduct(String productID);
     List<Product> getAllProducts();
     List<Product> getProductsByCategory(String category);
-    String getProductDetails(String productID);
+    Product getProductDetails(String productID);
+
+    boolean displayMenu();
 }
