@@ -14,17 +14,6 @@ public class WestminsterShoppingManager implements ShoppingManager{
     @Override
     public void addProduct(Product product) {
 
-        System.out.println(".......Add Product......");
-        String productType = scanner.nextLine().toLowerCase();
-
-        System.out.println("Enter Product ID: ");
-        product.setProductID(scanner.nextLine());
-
-        System.out.println("Enter Product Name: ");
-        product.setProductName(scanner.nextLine());
-
-        System.out.println("Enter the Number of Availability Items: ");
-        product.setAvailableItems(scanner.nextInt());
 
         if(products.size()<50){
             products.add(product);
@@ -34,20 +23,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
             System.out.println("MAXIMUM CAPACITY IS 50 !!!!!");
         }
 
-        System.out.println("Enter the Price: ");
-        product.setPrice(scanner.nextDouble());
 
-        if (productType.equals("electronics")){
-            addElectronicsProduct();
-        }
-
-        else if (productType.equals("clothing")){
-            addClothingProduct();
-        }
-
-        else{
-            System.out.println("Invalid Product type !!!!! ");
-        }
     }
 
     public void addElectronicsProduct(){
@@ -130,6 +106,34 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
         switch (choice){
             case 1:
+                System.out.println(".......Add Product......");
+                String productType = scanner.nextLine().toLowerCase();
+
+                System.out.println("Enter Product ID: ");
+                Product product = null;
+                product.setProductID(scanner.nextLine());
+
+                System.out.println("Enter Product Name: ");
+                product.setProductName(scanner.nextLine());
+
+                System.out.println("Enter the Number of Availability Items: ");
+                product.setAvailableItems(scanner.nextInt());
+
+                System.out.println("Enter the Price: ");
+                product.setPrice(scanner.nextDouble());
+
+                if (productType.equals("electronics")){
+                    addElectronicsProduct();
+                }
+
+                else if (productType.equals("clothing")){
+                    addClothingProduct();
+                }
+
+                else{
+                    System.out.println("Invalid Product type !!!!! ");
+                }
+
 
 
 
