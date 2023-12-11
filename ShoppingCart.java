@@ -20,4 +20,17 @@ public class ShoppingCart {
         products.remove(product);
     }
 
+    public double calculateTCost(){
+        double totalCost = 0;
+        for (Product product:products){
+            totalCost += product.getPrice();
+        }
+        return totalCost;
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart [products=" + products + "]";
+    }
+
 }
