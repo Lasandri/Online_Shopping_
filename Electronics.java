@@ -2,6 +2,8 @@ public class Electronics extends Product{
     private String brand;
     private int warrantyPeriod;
 
+
+
     public String getBrand() {
         return brand;
     }
@@ -17,10 +19,7 @@ public class Electronics extends Product{
         this.warrantyPeriod = warrantyPeriod;
     }
 
-    public Electronics(String brand, int warrantyPeriod) {
-        this.brand = brand;
-        this.warrantyPeriod = warrantyPeriod;
-    }
+
 
     @Override
     public String toString(){
