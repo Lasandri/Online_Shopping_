@@ -107,17 +107,18 @@ public class WestminsterShoppingManager implements ShoppingManager{
         switch (choice){
             case 1:
                 System.out.println(".......Add Product......");
-                String productType = scanner.nextLine().toLowerCase();
-
-                System.out.println("Enter Product ID: ");
-                Product product = null;
-                product.setProductID(scanner.nextLine());
-
+                String productType = scanner.nextLine().toLowerCase();Product product = null;
                 System.out.println("Enter Product Name: ");
                 product.setProductName(scanner.nextLine());
+                System.out.println("Enter Product ID: ");
+
+                product.setProductID(scanner.nextLine());
+
+
 
                 System.out.println("Enter the Number of Availability Items: ");
                 product.setAvailableItems(scanner.nextInt());
+                addProduct(product);
 
                 System.out.println("Enter the Price: ");
                 product.setPrice(scanner.nextDouble());
