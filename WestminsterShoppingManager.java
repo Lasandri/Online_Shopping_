@@ -2,58 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class WestminsterShoppingManager implements ShoppingManager{
+public class WestminsterShoppingManager implements ShoppingManager {
     private List<Product> products;
+    private Scanner scanner;
 
-
-    Scanner scanner = new Scanner(System.in);
-
-    public WestminsterShoppingManager(){
+    public WestminsterShoppingManager() {
         this.products = new ArrayList<>();
+        this.scanner = new Scanner(System.in);
     }
+
     @Override
     public void addProduct(Product product) {
-
-
-        if(products.size()<50){
+        if (product.getAvailableItems() <= 50) {
             products.add(product);
             System.out.println("Product added successfully....");
-
-        }else {
-            System.out.println("MAXIMUM CAPACITY IS 50 !!!!!");
+        } else {
+            System.out.println("Either MAXIMUM CAPACITY (50) exceeded or invalid available items! Product not added.");
         }
-
-
-    }
-
-    public void addElectronicsProduct(){
-        System.out.println("......Add Electronics Product");
-
-        Product product = new Electronics();
-
-
-
-        System.out.println("Enter the brand: ");
-        Electronics electronicProduct = (Electronics) products;
-        electronicProduct.setBrand(scanner.nextLine());
-
-        System.out.println("Enter the Warranty Period: ");
-        electronicProduct.setWarrantyPeriod(scanner.nextInt());
-
-    }
-
-
-    public void addClothingProduct(){
-        System.out.println("..........Add Clothing Product..........");
-        Product product = new Clothing();
-        Clothing clothingProduct = (Clothing) products;
-
-        System.out.println("Enter Color: ");
-        clothingProduct.setColor(scanner.nextLine());
-
-        System.out.println("Enter Product Name: ");
-        clothingProduct.setSize(scanner.nextLine());
-
     }
 
     @Override
@@ -78,21 +43,47 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public Product getProductDetails(String productID) {
-        for (Product product : products) {
-            if (product.getProductID().equals(productID)) {
-                return product;
-            }
-        }
-        return null; // Not found
+        return null;
     }
 
-    @Override
-    public String toString() {
-        return "WestminsterShoppingManager [products=" + products + "]";
+    public void addElectronicsProduct() {
+        System.out.println("......Add Electronics Product");
+
+        Electronics electronicProduct = new Electronics();
+
+        System.out.println("Enter the brand: ");
+        scanner.nextLine(); // Consume the newline character
+        electronicProduct.setBrand(scanner.nextLine());
+
+        System.out.println("Enter the Warranty Period: ");
+        electronicProduct.setWarrantyPeriod(scanner.nextInt());
+
+        // Add the electronics product to the list
+        addProduct(electronicProduct);
+
     }
+
+    public void addClothingProduct() {
+        System.out.println("..........Add Clothing Product..........");
+
+        Clothing clothingProduct = new Clothing();
+
+        System.out.println("Enter Color: ");
+        scanner.nextLine(); // Consume the newline character
+        clothingProduct.setColor(scanner.nextLine());
+
+        System.out.println("Enter Size: (M or L)");
+        clothingProduct.setSize(scanner.nextLine());
+
+
+
+        addProduct(clothingProduct);
+
+    }
+
+    // Other methods...
 
     public boolean displayMenu() {
-
         boolean exit = false;
         System.out.println("Westminster Shopping Manager Menu:");
         System.out.println("1. Add a product");
@@ -104,67 +95,62 @@ public class WestminsterShoppingManager implements ShoppingManager{
         System.out.print("\nEnter your choice: ");
         int choice = scanner.nextInt();
 
-        switch (choice){
+        switch (choice) {
             case 1:
                 System.out.println(".......Add Product......");
-                String productType = scanner.nextLine().toLowerCase();Product product = null;
+
+                scanner.nextLine();
+                System.out.println("Enter Product Type (electronics/clothing): ");
+                String productType = scanner.nextLine().toLowerCase();
+                Product product = new Product();
+
                 System.out.println("Enter Product Name: ");
                 product.setProductName(scanner.nextLine());
+
                 System.out.println("Enter Product ID: ");
-
                 product.setProductID(scanner.nextLine());
-
-
 
                 System.out.println("Enter the Number of Availability Items: ");
                 product.setAvailableItems(scanner.nextInt());
-                addProduct(product);
 
                 System.out.println("Enter the Price: ");
                 product.setPrice(scanner.nextDouble());
 
-                if (productType.equals("electronics")){
+                if (productType.equals("electronics")) {
                     addElectronicsProduct();
-                }
-
-                else if (productType.equals("clothing")){
+                } else if (productType.equals("clothing")) {
                     addClothingProduct();
-                }
-
-                else{
+                } else {
                     System.out.println("Invalid Product type !!!!! ");
                 }
-
-
-
+                break;
 
             case 2:
-
-
-
+                // Code for case 2
+                break;
 
             case 3:
-
-
-
+                // Code for case 3
+                break;
 
             case 4:
-
-
-
+                // Code for case 4
+                break;
 
             case 5:
                 exit = true;
+                break;
+
+            default:
+                System.out.println("Invalid choice! Please enter a valid choice.");
         }
         return exit;
     }
 
     public static void main(String[] args) {
         ShoppingManager say = new WestminsterShoppingManager();
-
-        for(boolean exit = false; !exit; exit = say.displayMenu()){
-
+        while (!say.displayMenu()) {
+            // Loop until the user chooses to exit
         }
     }
-
 }
