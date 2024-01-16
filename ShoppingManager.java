@@ -1,12 +1,23 @@
 import java.util.List;
 
 public interface ShoppingManager {
-    void addProduct(Product product);
-    void removeProduct(Product product);
-    Product findProduct(String productID);
-    List<Product> getAllProducts();
-    List<Product> getProductsByCategory(String category);
-    Product getProductDetails(String productID);
+    static void main(String[] args) {
+        ShoppingManager say = new WestminsterShoppingManager();
+        while (!say.displayMenu()) {
+
+        }
+    }
+
+
+    boolean addProduct();
+
+    void deleteProduct();
+
+    List<Product> printProductList();
+
+    List<Product> readFile();
+
+    Product saveToFile();
 
     boolean displayMenu();
 }
