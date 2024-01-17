@@ -6,6 +6,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
     private static final int MAX_PRODUCTS = 50;
     private static final String FILE_NAME = "productList.txt";
 
+    final ArrayList<User> users = new ArrayList<>(50);
     private final ArrayList<Product> productList = new ArrayList<>(MAX_PRODUCTS);
 
 
@@ -15,7 +16,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Enter product Type (Electronics/Clothing): ");
+            System.out.println("\nEnter product Type (Electronics/Clothing): ");
             Product product = new Product();
             String productType = scanner.nextLine();
             product.setProductType(productType);
@@ -182,7 +183,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
             if (product instanceof Electronics) {
                 System.out.println("Product Type: " +product.getProductType() + " ->" + product.getProductName() + " (ID: " + product.getProductID() + ")");
             } else if (product instanceof Clothing) {
-                System.out.println("Clothing: " + product.getProductName() + " (ID: " + product.getProductID() + ")");
+                System.out.println("Product Type: " +product.getProductType() + " ->" + product.getProductName() + " (ID: " + product.getProductID() + ")");
             }
             System.out.println("   Price: $" + product.getPrice());
             System.out.println("   Available Items: " + product.getAvailableItems());
@@ -218,9 +219,30 @@ public class WestminsterShoppingManager implements ShoppingManager {
     }
 
     @Override
-    public List<Product> readFile() {
+    public List<Product> loadFile() {
+        try (Scanner scanner = new Scanner(new File(FILE_NAME))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                // Process the line (deserialize and add to productList)
+                // Note: You need to implement the deserialization logic based on your file format.
+            }
+            System.out.println("Successfully loaded from file: " + FILE_NAME);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + FILE_NAME);
+        } catch (Exception e) {
+            System.out.println("Error reading from file: " + e.getMessage());
+            e.printStackTrace(); // Print the stack trace for detailed information
+        }
+        return productList;
 
-        return null;
+    }
+
+    public void openUI(){
+        LoginPage loginPage = new LoginPage(users, productList);
+        loginPage.setTitle("Login or Register");
+        loginPage.setSize(500, 500);
+        loginPage.setResizable(false);
+        loginPage.setVisible(true);
     }
 
 
@@ -264,12 +286,13 @@ public class WestminsterShoppingManager implements ShoppingManager {
 
             case 5:
                 System.out.println("........... Load Products ........");
-                readFile();
+                loadFile();
                 break;
 
             case 6:
                 System.out.println("........... Open GUI........");
                 // Implement the logic to open the GUI
+                openUI();
                 break;
 
             case 7:
@@ -289,6 +312,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
         while (!shoppingManager.displayMenu()) {
 
         }
+        shoppingManager.saveToFile();
     }
 
 

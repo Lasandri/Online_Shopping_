@@ -1,12 +1,7 @@
 import java.util.List;
 
 public interface ShoppingManager {
-    static void main(String[] args) {
-        ShoppingManager say = new WestminsterShoppingManager();
-        while (!say.displayMenu()) {
 
-        }
-    }
 
 
     boolean addProduct();
@@ -15,9 +10,11 @@ public interface ShoppingManager {
 
     List<Product> printProductList();
 
-    List<Product> readFile();
+    List<Product> loadFile();
 
     Product saveToFile();
 
     boolean displayMenu();
+
+    void openUI();
 }

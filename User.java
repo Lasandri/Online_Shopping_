@@ -1,25 +1,32 @@
-public class User {
-    private String userName;
-    private String password;
+import java.util.ArrayList;
 
-    public String getUserName() {
-        return userName;
+public class User {
+    private final String username;
+    private final String password;
+    private final ArrayList<purchase> purchaseHistory;
+
+    public User(String username,String password) {
+        this.username = username;
+        this.password = password;
+        this.purchaseHistory = new ArrayList<>();
     }
 
+    // getter for username
+    public String getUserName() {
+        return username;
+    }
+
+    // getter for password
     public String getPassword() {
         return password;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public boolean firstPurchase(){
+        return this.purchaseHistory.isEmpty();
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void addPurchase(purchase purchase){
+        purchaseHistory.add(purchase);
     }
 
-    @Override
-    public String toString() {
-        return "User [username= "+userName+", Password= "+password+" ]";
-    }
 }
